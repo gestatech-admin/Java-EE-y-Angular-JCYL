@@ -13,6 +13,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -61,8 +62,11 @@ public class CentrosEndpoint {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response lista() {
-		final List<Centro> results = centrosServicio.getCentros();
-		return Response.ok(results).header("total", centrosServicio.total()).build();
+		final List<Centro> centros = centrosServicio.getCentros();
+
+		GenericEntity<List<Centro>> list = new GenericEntity<List<Centro>>(centros) {
+		};
+		return Response.ok(list).header("total", centrosServicio.total()).build();
 	}
 
 	@GET
