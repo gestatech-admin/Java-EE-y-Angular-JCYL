@@ -6,6 +6,8 @@ import {CentrosComponent} from './centros/centros.component';
 import {CentroComponent} from './centro/centro.component';
 import {CentroService} from './centro.service';
 import {HttpModule} from '@angular/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatIconModule, MatListModule, MatTableModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import {HttpModule} from '@angular/http';
   ],
   imports: [
     BrowserModule,
-    HttpModule
+    HttpModule,
+    BrowserAnimationsModule,
+    MatListModule, MatIconModule, MatTableModule
   ],
   providers: [CentroService],
   bootstrap: [AppComponent]
