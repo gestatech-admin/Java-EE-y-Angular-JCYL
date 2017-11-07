@@ -7,16 +7,18 @@ import {MatTableDataSource} from '@angular/material';
   selector: 'app-centros',
   template: `
 
+    <div *ngFor="let alumno of alumnos$ | async">{{alumno.nombre}}</div>
+    
     <div class="example-container mat-elevation-z8">
       <mat-table #table [dataSource]="dataSource">
 
         <ng-container matColumnDef="centroId">
-          <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.centroId}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="nombre">
-          <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Nombre</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.nombre}}</mat-cell>
         </ng-container>
 
@@ -26,7 +28,7 @@ import {MatTableDataSource} from '@angular/material';
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="cargarCentro(row)"></mat-row>
       </mat-table>
     </div>
 
@@ -36,7 +38,7 @@ import {MatTableDataSource} from '@angular/material';
 })
 export class CentrosComponent implements OnInit {
 
-  centros$;
+  alumnos$;
 
   dataSource;
 
@@ -45,11 +47,14 @@ export class CentrosComponent implements OnInit {
   constructor(private centroService: CentroService) {
   }
 
+  cargarCentro(row) {
+    this.alumnos$ = this.centroService.cargarAlumnos(row.centroId).map(x => x.json());
+  }
+
   ngOnInit() {
-    this.centros$ = this.centroService.getCentros().map(x => x.json()).subscribe(
+    this.centroService.getCentros().map(x => x.json()).subscribe(
       x => this.dataSource = new MatTableDataSource<Element>(x)
     );
-
   }
 
 }

@@ -1,8 +1,13 @@
 package es.jcyl.educa.javaee.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,6 +26,10 @@ public class Centro implements BaseEntity<Long> {
 	private String nombre;
 	@Column(name = "N_CURSO_ID")
 	private Long cursoId;
+
+	@OneToMany
+	@JoinColumn(name = "C_CENTRO_ID")
+	private Set<AlumnoEstudios> estudios = new HashSet<>();
 
 	@Override
 	public Long getId() {
@@ -49,6 +58,14 @@ public class Centro implements BaseEntity<Long> {
 
 	public void setCursoId(Long cursoId) {
 		this.cursoId = cursoId;
+	}
+
+	public Set<AlumnoEstudios> getEstudios() {
+		return estudios;
+	}
+
+	public void setEstudios(Set<AlumnoEstudios> estudios) {
+		this.estudios = estudios;
 	}
 
 }

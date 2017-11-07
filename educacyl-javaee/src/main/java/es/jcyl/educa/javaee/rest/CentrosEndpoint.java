@@ -3,6 +3,7 @@ package es.jcyl.educa.javaee.rest;
 import java.net.URI;
 import java.util.List;
 
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.ws.rs.Consumes;
@@ -23,6 +24,7 @@ import es.jcyl.educa.javaee.model.Centro;
 import es.jcyl.educa.javaee.service.CentrosServicio;
 
 @Path("/centros")
+@RequestScoped
 public class CentrosEndpoint {
 
 	@Inject
@@ -92,4 +94,5 @@ public class CentrosEndpoint {
 		}
 		return Response.noContent().build();
 	}
+
 }

@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.transaction.Transactional;
 
 import org.hibernate.criterion.Projections;
+import org.hibernate.sql.JoinType;
 
 import es.jcyl.educa.javaee.model.Centro;
 
@@ -18,7 +19,9 @@ public class CentrosServicio extends BaseServicio {
 
 	@Transactional
 	public List<Centro> getCentros() {
-		return getSession().createCriteria(Centro.class).list();
+
+		return getSession().createCriteria(Centro.class).createAlias("estudios", "estudios", JoinType.LEFT_OUTER_JOIN)
+				.list();
 	}
 
 	public void crear(Centro centro) {

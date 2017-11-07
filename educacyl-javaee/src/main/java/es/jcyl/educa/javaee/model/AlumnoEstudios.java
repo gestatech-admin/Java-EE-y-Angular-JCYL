@@ -36,6 +36,7 @@ public class AlumnoEstudios implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "C_CENTRO_ID")
+	@XmlTransient
 	private Centro centro;
 
 	@Column(name = "C_ESTUDIO_ID")

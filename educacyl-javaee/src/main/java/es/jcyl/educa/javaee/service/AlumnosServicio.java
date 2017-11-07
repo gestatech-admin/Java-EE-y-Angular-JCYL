@@ -27,4 +27,13 @@ public class AlumnosServicio extends BaseServicio {
 		return resultList;
 	}
 
+	@Transactional
+	public List<Alumno> getAlumnosDeUnCentro(Long centroId) {
+		List<Alumno> resultList = entityManager.createQuery(
+				"SELECT distinct a FROM Alumno a JOIN FETCH a.estudios ae WHERE a.id = ae.alumno AND ae.centro.id = :centroId")
+				.setParameter("centroId", centroId).getResultList();
+
+		return resultList;
+	}
+
 }

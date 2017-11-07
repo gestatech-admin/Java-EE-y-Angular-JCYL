@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -23,6 +24,17 @@ public class AlumnosEndpoint {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response lista() {
 		final List<Alumno> alumnos = alumnosServicio.getAlumnos();
+
+		GenericEntity<List<Alumno>> list = new GenericEntity<List<Alumno>>(alumnos) {
+		};
+		return Response.ok(list).build();
+	}
+
+	@GET
+	@Path("/centro/{centroId}")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response listaDeUnCentro(@PathParam("centroId") Long centroId) {
+		final List<Alumno> alumnos = alumnosServicio.getAlumnosDeUnCentro(centroId);
 
 		GenericEntity<List<Alumno>> list = new GenericEntity<List<Alumno>>(alumnos) {
 		};
