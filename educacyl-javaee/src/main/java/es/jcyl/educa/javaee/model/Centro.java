@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
 @Table(name = "CURS_CENTROS")
 @XmlRootElement
@@ -22,6 +24,7 @@ public class Centro implements BaseEntity<Long> {
 	@Id
 	@Column(name = "C_CENTRO_ID")
 	private Long centroId;
+	@Length(max = 10, min = 10)
 	@Column(name = "A_DESP")
 	private String nombre;
 	@Column(name = "N_CURSO_ID")

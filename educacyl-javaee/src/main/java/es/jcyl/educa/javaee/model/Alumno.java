@@ -1,11 +1,13 @@
 package es.jcyl.educa.javaee.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -13,6 +15,10 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "CURS_ALUMNOS")
@@ -46,7 +52,13 @@ public class Alumno implements Serializable {
 
 	@OneToMany
 	@JoinColumn(name = "C_CIE_ID")
-	private List<AlumnoEstudios> estudios = new ArrayList<>();
+	@BatchSize(size = 20)
+	private Set<AlumnoEstudios> estudios = new HashSet<>();
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "C_CIE_ID")
+	@Fetch(FetchMode.SUBSELECT)
+	private Set<Domicilio> domicilios = new HashSet<>();
 
 	public Alumno() {
 		super();
@@ -108,11 +120,19 @@ public class Alumno implements Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public List<AlumnoEstudios> getEstudios() {
+	public Set<AlumnoEstudios> getEstudios() {
 		return estudios;
 	}
 
-	public void setEstudios(List<AlumnoEstudios> estudios) {
+	public Set<Domicilio> getDomicilios() {
+		return domicilios;
+	}
+
+	public void setDomicilios(Set<Domicilio> domicilios) {
+		this.domicilios = domicilios;
+	}
+
+	public void setEstudios(Set<AlumnoEstudios> estudios) {
 		this.estudios = estudios;
 	}
 

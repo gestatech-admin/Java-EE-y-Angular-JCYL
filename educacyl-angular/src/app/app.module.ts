@@ -8,6 +8,7 @@ import {CentroService} from './centro.service';
 import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule, MatListModule, MatTableModule} from '@angular/material';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import {MatIconModule, MatListModule, MatTableModule} from '@angular/material';
     BrowserModule,
     HttpModule,
     BrowserAnimationsModule,
-    MatListModule, MatIconModule, MatTableModule
+    MatListModule, MatIconModule, MatTableModule, FormsModule, ReactiveFormsModule
   ],
   providers: [CentroService],
   bootstrap: [AppComponent]

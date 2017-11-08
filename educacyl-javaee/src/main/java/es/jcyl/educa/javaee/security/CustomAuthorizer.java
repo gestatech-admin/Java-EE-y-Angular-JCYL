@@ -19,8 +19,10 @@ public class CustomAuthorizer implements Serializable {
 
 	@Secures
 	@Admin
-	public boolean doAdminCheck(InvocationContext invocationContext, BeanManager manager) throws Exception {
-		boolean allowed = currentUser.containsKey("user") && currentUser.get("user").equals("admin");
+	public boolean doAdminCheck(InvocationContext invocationContext, BeanManager manager)
+			throws Exception {
+		boolean allowed = currentUser.containsKey("user")
+				&& currentUser.get("user").equals("admin");
 		if (!allowed) {
 			throw new Exception("Access denied");
 		}
@@ -29,7 +31,8 @@ public class CustomAuthorizer implements Serializable {
 
 	@Secures
 	@Guest
-	public boolean doGuestCheck(InvocationContext invocationContext, BeanManager manager) throws Exception {
+	public boolean doGuestCheck(InvocationContext invocationContext, BeanManager manager)
+			throws Exception {
 		boolean allowed = currentUser.containsKey("user") && currentUser.get("user").equals("guest")
 				|| doAdminCheck(null, null);
 		if (!allowed) {

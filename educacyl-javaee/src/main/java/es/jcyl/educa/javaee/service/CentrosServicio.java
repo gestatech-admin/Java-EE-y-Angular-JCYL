@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.transaction.Transactional;
 
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Projections;
 import org.hibernate.sql.JoinType;
 
@@ -28,8 +29,11 @@ public class CentrosServicio extends BaseServicio {
 		getSession().save(centro);
 	}
 
-	public Centro buscarPorId(Integer id) {
-		return getSession().get(Centro.class, id);
+	@Transactional
+	public Centro buscarPorId(Long id) {
+		Centro centro = getSession().get(Centro.class, id);
+		Hibernate.initialize(centro.getEstudios());
+		return centro;
 	}
 
 	public void eliminar(Centro centro) {

@@ -34,14 +34,15 @@ public class CentrosEndpoint {
 	@Consumes("application/json")
 	public Response crear(Centro centro) {
 		centrosServicio.crear(centro);
-		URI url = UriBuilder.fromResource(CentrosEndpoint.class).path(String.valueOf(centro.getId())).build();
+		URI url = UriBuilder.fromResource(CentrosEndpoint.class)
+				.path(String.valueOf(centro.getId())).build();
 		return Response.created(url).build();
 	}
 
 	@DELETE
 	@Path("/{id:[0-9][0-9]*}")
 	@RestSecured
-	public Response eliminar(@PathParam("id") Integer id) {
+	public Response eliminar(@PathParam("id") Long id) {
 		Centro centro = centrosServicio.buscarPorId(id);
 		if (centro == null) {
 			return Response.status(Status.NOT_FOUND).build();
@@ -52,16 +53,17 @@ public class CentrosEndpoint {
 
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
-	public Response buscarPorId(@PathParam("id") Integer id) {
+	public Centro buscarPorId(@PathParam("id") Long id) {
 		try {
 			Centro centro = centrosServicio.buscarPorId(id);
-			return Response.ok(centro).build();
+			return centro;
 		} catch (NoResultException nre) {
-			return Response.status(Status.NOT_FOUND).build();
+			return null;
 		}
 	}
 
 	@GET
+	// @Secure
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response lista() {
 		final List<Centro> centros = centrosServicio.getCentros();
@@ -73,8 +75,8 @@ public class CentrosEndpoint {
 
 	@GET
 	@Path("total")
-	public Response total() {
-		return Response.ok(centrosServicio.total()).build();
+	public Long total() {
+		return (Long) centrosServicio.total();
 	}
 
 	@PUT

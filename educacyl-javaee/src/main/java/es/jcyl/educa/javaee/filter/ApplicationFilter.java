@@ -11,9 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Created by RAFAEL-PESTANO on 29/12/2014.
- */
 @WebFilter(filterName = "applicationFilter", urlPatterns = { "/*" })
 public class ApplicationFilter implements Filter {
 
