@@ -62,8 +62,6 @@ import {FormBuilder, FormControl, Validators} from '@angular/forms';
         <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="cargarCentro(row)"></mat-row>
       </mat-table>
     </div>
-
-
   `,
   styleUrls: ['./centros.component.css']
 })
@@ -105,18 +103,18 @@ export class CentrosComponent implements OnInit {
   }
 
   cargarCentro(row) {
-    this.alumnos$ = this.centroService.cargarAlumnos(row.centroId).map(x => x.json());
+    this.alumnos$ = this.centroService.cargarAlumnos(row.centroId);
   }
 
   enviar() {
     console.log(this.form.value);
-    this.centroService.filtrado(this.form.value).map(x => x.json()).subscribe(
+    this.centroService.filtrado(this.form.value).subscribe(
       x => console.log(x)
     );
   }
 
   ngOnInit() {
-    this.centroService.getCentros().map(x => x.json()).subscribe(
+    this.centroService.getCentros().subscribe(
       x => this.dataSource = new MatTableDataSource<Element>(x)
     );
   }

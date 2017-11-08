@@ -5,11 +5,11 @@ import {AppComponent} from './app.component';
 import {CentrosComponent} from './centros/centros.component';
 import {CentroComponent} from './centro/centro.component';
 import {CentroService} from './centro.service';
-import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule, MatListModule, MatTableModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ProvinciaComponent } from './provincia/provincia.component';
+import {ProvinciaComponent} from './provincia/provincia.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { ProvinciaComponent } from './provincia/provincia.component';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatListModule, MatIconModule, MatTableModule, FormsModule, ReactiveFormsModule
   ],

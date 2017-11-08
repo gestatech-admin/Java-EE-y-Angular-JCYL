@@ -14,6 +14,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -69,6 +70,18 @@ public class CentrosApi {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response lista() {
 		final List<Centro> centros = centrosServicio.getCentros();
+
+		GenericEntity<List<Centro>> list = new GenericEntity<List<Centro>>(centros) {
+		};
+		return Response.ok(list).header("total", centrosServicio.total()).build();
+	}
+
+	@GET
+	@Path("filtro")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response filtro(@QueryParam("filtro") Filtro filtro) {
+
+		final List<Centro> centros = centrosServicio.getCentros(filtro);
 
 		GenericEntity<List<Centro>> list = new GenericEntity<List<Centro>>(centros) {
 		};

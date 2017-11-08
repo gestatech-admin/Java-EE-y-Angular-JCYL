@@ -1,38 +1,37 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, URLSearchParams} from '@angular/http';
-import {RequestOptionsArgs} from '@angular/http/src/interfaces';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpHeaders} from '@angular/common/http/src/headers';
 
 @Injectable()
 export class CentroService {
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   getCentros() {
-    const headers: Headers = new Headers();
-    headers.append('Accept', 'application/json');
-    const requestOptionsArgs: RequestOptionsArgs = {headers};
-    return this.http.get('http://localhost:8080/educacyl-javaee/api/centros', requestOptionsArgs);
+    return this.http.get('http://localhost:8080/educacyl-javaee/api/centros', {
+      headers: new HttpHeaders({'Accept': 'application/json'})
+    });
   }
 
   cargarAlumnos(centroId) {
-    const headers: Headers = new Headers();
-    headers.append('Accept', 'application/json');
-    const requestOptionsArgs: RequestOptionsArgs = {headers};
-    return this.http.get('http://localhost:8080/educacyl-javaee/api/alumnos/centro/' + centroId, requestOptionsArgs);
+    return this.http.get('http://localhost:8080/educacyl-javaee/api/alumnos/centro/' + centroId, {
+      headers: new HttpHeaders({'Accept': 'application/json'})
+    });
   }
 
   filtrado(value) {
-    const headers: Headers = new Headers();
-    headers.append('Accept', 'application/json');
-    const params = new URLSearchParams();
 
-    for (const key of Object.keys(value)) {
-      params.append(key, value[key]);
-    }
+    const params = new HttpParams();
+    params.set('filtro', JSON.stringify(value));
 
-    const requestOptionsArgs: RequestOptionsArgs = {headers, params};
+    // for (const key of Object.keys(value)) {
+    //   params.append(key, value[key]);
+    // }
 
-    return this.http.get('http://localhost:8080/educacyl-javaee/api/centros/filtrado/', requestOptionsArgs);
+    return this.http.get('http://localhost:8080/educacyl-javaee/api/centros/', {
+      headers: new HttpHeaders({'Accept': 'application/json'}),
+      params
+    });
   }
 }

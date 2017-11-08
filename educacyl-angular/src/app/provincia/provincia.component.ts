@@ -5,17 +5,6 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './provincia.component.html',
   styleUrls: ['./provincia.component.css']
 })
-export class ProvinciaComponent implements OnInit {
-
-  name;
-
-  constructor() {
-    setInterval(() => {
-      this.name = Math.random();
-    }, 1000);
-  }
-
-  ngOnInit() {
-  }
+export class ProvinciaComponent  {
 
 }

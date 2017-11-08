@@ -6,12 +6,14 @@ import javax.ejb.Stateless;
 import javax.transaction.Transactional;
 
 import es.jcyl.educa.javaee.alumnos.modelo.Alumno;
+import es.jcyl.educa.javaee.app.Logged;
 import es.jcyl.educa.javaee.comun.servicio.BaseServicio;
 
 @Stateless
 public class AlumnosServicio extends BaseServicio {
 
 	@Transactional
+	@Logged
 	public List<Alumno> getAlumnos() {
 		List<Alumno> resultList = entityManager.createQuery("SELECT a FROM Alumno a")
 				.getResultList();
