@@ -4,6 +4,6 @@
 
     <interceptors>
         <class>org.apache.deltaspike.security.impl.extension.SecurityInterceptor</class>
-        <class>es.jcyl.educa.javaee.rest.RestSecuredImpl</class>
+        <class>es.jcyl.educa.javaee.api.security.RestSecuredImpl</class>
     </interceptors>
 </beans>

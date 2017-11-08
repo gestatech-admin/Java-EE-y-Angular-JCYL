@@ -5,7 +5,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
-import es.jcyl.educa.javaee.service.CentrosServicio;
+import es.jcyl.educa.javaee.centros.servicios.CentrosServicio;
 
 @Singleton
 @Startup
