@@ -19,7 +19,7 @@ export class CentroService {
     const headers: Headers = new Headers();
     headers.append('Accept', 'application/json');
     const requestOptionsArgs: RequestOptionsArgs = {headers};
-    return this.http.get('http://localhost:8080/educacyl-javaee/api/alumnos/centro/'+centroId, requestOptionsArgs);
+    return this.http.get('http://localhost:8080/educacyl-javaee/api/alumnos/centro/' + centroId, requestOptionsArgs);
   }
 
   filtrado(value) {

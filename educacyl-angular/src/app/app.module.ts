@@ -9,12 +9,14 @@ import {HttpModule} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule, MatListModule, MatTableModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ProvinciaComponent } from './provincia/provincia.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CentrosComponent,
-    CentroComponent
+    CentroComponent,
+    ProvinciaComponent
   ],
   imports: [
     BrowserModule,
