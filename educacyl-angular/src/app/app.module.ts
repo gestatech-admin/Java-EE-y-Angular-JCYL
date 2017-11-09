@@ -10,6 +10,7 @@ import {MatIconModule, MatListModule, MatTableModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProvinciaComponent} from './provincia/provincia.component';
 import {HttpClientModule} from '@angular/common/http';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatListModule, MatIconModule, MatTableModule, FormsModule, ReactiveFormsModule
+    MatListModule, MatIconModule, MatTableModule, FormsModule, ReactiveFormsModule, FlexLayoutModule
   ],
   providers: [CentroService],
   bootstrap: [AppComponent]

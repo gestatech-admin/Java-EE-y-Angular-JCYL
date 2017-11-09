@@ -8,6 +8,39 @@ import {FormBuilder, FormControl, Validators} from '@angular/forms';
   selector: 'app-centros',
   template: `
 
+    <div class="container">
+      <div fxLayout="row"
+           fxLayout.xs="column"
+           fxLayout.sm="column"
+           fxFlex class="contentResp">
+        <div class="blocks" fxFlex> ...  </div>
+        <div class="blocks" fxFlex> ...  </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-8">.col-12 .col-md-8</div>
+        <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+        <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+        <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">.col-6</div>
+        <div class="col-6">.col-6</div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-4 offset-md-4">.col-md-4 .offset-md-4</div>
+      </div>
+    </div>
+
     <form>
 
       <input [formGroup]="form" [formControl]="form.controls['name']">
@@ -78,27 +111,10 @@ export class CentrosComponent implements OnInit {
   constructor(private centroService: CentroService, private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
       name: new FormControl('a', Validators.required),
-      date: 'b',
-      date1: 'b',
-      date2: 'b',
-      date3: 'b',
-      date4: 'b',
-      date5: 'b',
-      date6: 'b',
-      date7: 'b',
-      date8: 'b',
-      date9: 'b',
-      date10: 'b',
-      date11: 'b',
-      date12: 'b',
-      date13: 'b',
-      date14: 'b',
-      date15: 'b',
-      date16: 'b',
-      date17: 'b',
-      date18: 'b',
-      date19: 'b',
-      date20: 'b'
+      date: 'b', date1: 'b', date2: 'b', date3: 'b', date4: 'b', date5: 'b',
+      date6: 'b', date7: 'b', date8: 'b', date9: 'b', date10: 'b', date11: 'b',
+      date12: 'b', date13: 'b', date14: 'b', date15: 'b', date16: 'b', date17: 'b',
+      date18: 'b', date19: 'b', date20: 'b'
     });
   }
 
@@ -115,7 +131,7 @@ export class CentrosComponent implements OnInit {
 
   ngOnInit() {
     this.centroService.getCentros().subscribe(
-      x => this.dataSource = new MatTableDataSource<Element>(x)
+      (x: any) => this.dataSource = new MatTableDataSource<Element>(x)
     );
   }
 
