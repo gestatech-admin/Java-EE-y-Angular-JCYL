@@ -36,7 +36,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Path("/usuarios")
 @Transactional
-public class UsuarioEndpoint {
+public class UsuarioApi {
 
 	@Context
 	private UriInfo uriInfo;

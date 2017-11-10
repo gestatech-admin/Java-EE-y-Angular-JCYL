@@ -1,0 +1,15 @@
+#menu button {
+  width: 150px;
+  background-color: #DEE6EF;
+  border: 0;
+  padding: 10px;
+}
+
+.mat-menu-item {
+  background-color: white;
+  width: 200px;
+}
+
+#menu {
+  background-color: #DEE6EF;
+}

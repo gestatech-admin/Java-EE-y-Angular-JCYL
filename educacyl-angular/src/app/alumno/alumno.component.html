@@ -1,0 +1,10 @@
+<div>
+
+  {{alumnoInput | json}}
+
+  {{alumnoInput.nombre}}
+  <span *ngIf="alumnoInput.esPrimaria">
+    Primaria
+  </span>
+  <button (click)="enviar()">editar</button>
+</div>
