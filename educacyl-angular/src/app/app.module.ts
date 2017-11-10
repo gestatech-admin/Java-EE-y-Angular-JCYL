@@ -35,6 +35,7 @@ import {AlumnosService} from './alumnos/alumnos.service';
 
 const routes = [
   {path: '', component: InfoComponent},
+  {path: 'alumno', component: AlumnoComponent},
   {path: 'centros', component: CentrosComponent, canActivate: [AuthGuard]},
   {path: 'centro', component: CentroComponent},
   {path: 'alumnos', component: AlumnosComponent},
@@ -54,17 +55,18 @@ const routes = [
   ],
   imports: [
     BrowserModule,
-    HttpClientModule, MatCardModule,
-    MatInputModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatInputModule,
     MatMenuModule,
     MatListModule,
     MatIconModule,
     MatTableModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatPaginatorModule,
-    FlexLayoutModule,
     RouterModule.forRoot(routes)
   ],
   providers: [CentroService, ProvinciaService, UsuarioService, AuthGuard, AuthService, AlumnosService,

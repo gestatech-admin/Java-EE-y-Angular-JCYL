@@ -5,10 +5,6 @@ import {ProvinciaService} from './provincia.service';
   selector: 'app-provincia',
   template:
       `
-    <div *ngFor="let alumno of alumnos">
-      <app-alumno [alumnoInput]="alumno" (editandoAlumno)="escuchar($event)"></app-alumno>
-    </div>
-
     <p *ngFor="let provincia of provincias">
       {{provincia.nombre}}
     </p>

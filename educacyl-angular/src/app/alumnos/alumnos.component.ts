@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AlumnosService} from './alumnos.service';
-import {MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-alumnos',
@@ -12,13 +12,23 @@ export class AlumnosComponent implements OnInit {
   dataSource;
   displayedColumns = ['nombre'];
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private alumnosService: AlumnosService) {
+
   }
 
   ngOnInit() {
-    this.alumnosService.getAlumnos().subscribe(
+    this.search(0);
+
+    this.paginator.page.subscribe(x => {
+      this.search(x.pageIndex);
+    });
+  }
+
+  private search(page) {
+    this.alumnosService.getAlumnos(page).subscribe(
       (x: any) => this.dataSource = new MatTableDataSource<Element>(x)
     );
   }
-
 }

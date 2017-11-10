@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,8 +23,8 @@ public class AlumnosApi {
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response lista() {
-		final List<Alumno> alumnos = alumnosServicio.getAlumnos();
+	public Response lista(@QueryParam(value = "page") Integer page) {
+		final List<Alumno> alumnos = alumnosServicio.getAlumnos(page);
 
 		GenericEntity<List<Alumno>> list = new GenericEntity<List<Alumno>>(alumnos) {
 		};

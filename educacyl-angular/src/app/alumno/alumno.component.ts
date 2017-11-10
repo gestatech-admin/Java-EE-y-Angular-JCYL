@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-alumno',
@@ -7,16 +7,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class AlumnoComponent {
 
-  @Input()
-  alumnoInput;
-
-  @Output()
-  editandoAlumno = new EventEmitter();
-
-  enviar() {
-    console.log('hijo', this.alumnoInput);
-
-    this.editandoAlumno.emit({valor: 'prueba'});
+  enviar(formulario) {
+    console.log(formulario);
   }
 
 }

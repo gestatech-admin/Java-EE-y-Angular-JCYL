@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import {AuthService} from './usuario/auth.service';
 import {Router} from '@angular/router';
+import {from} from 'rxjs/observable/from';
+import {map} from 'rxjs/operator/map';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +22,7 @@ import {Router} from '@angular/router';
       </mat-menu>
       <mat-menu #alumnos="matMenu">
         <button mat-menu-item [routerLink]="['/alumnos']">Listado</button>
-        <button mat-menu-item>Alta</button>
+        <button mat-menu-item [routerLink]="['/alumno']">Alta</button>
       </mat-menu>
     </div>
 

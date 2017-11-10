@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.transaction.Transactional;
 
+import org.hibernate.Criteria;
+
 import es.jcyl.educa.javaee.alumnos.modelo.Alumno;
 import es.jcyl.educa.javaee.app.Logged;
 import es.jcyl.educa.javaee.comun.servicio.BaseServicio;
@@ -32,6 +34,18 @@ public class AlumnosServicio extends BaseServicio {
 				.setParameter("centroId", centroId).getResultList();
 
 		return resultList;
+	}
+
+	public List<Alumno> getAlumnos(Integer page) {
+
+		Criteria criteria = getSession().createCriteria(Alumno.class);
+		criteria.setFirstResult((page - 1) * 10);
+		criteria.setMaxResults(10);
+		List<Alumno> list = criteria.list();
+		for (Alumno alumno : list) {
+			alumno.getEstudios().isEmpty();
+		}
+		return list;
 	}
 
 }
