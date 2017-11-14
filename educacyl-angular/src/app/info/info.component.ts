@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {UsuarioService} from '../usuario/usuario.service';
-import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-info',

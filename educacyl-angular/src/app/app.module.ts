@@ -13,17 +13,14 @@ import {
   MatInputModule,
   MatListModule,
   MatMenuModule,
-  MatPaginatorModule,
   MatTableModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProvinciaComponent} from './provincia/provincia.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {AlumnoComponent} from './alumno/alumno.component';
 import {ProvinciaService} from './provincia/provincia.service';
 import {RouterModule} from '@angular/router';
-import {AlumnosComponent} from './alumnos/alumnos.component';
 import {InfoComponent} from './info/info.component';
 import {DatosComponent} from './datos/datos.component';
 import {UsuarioService} from './usuario/usuario.service';
@@ -31,14 +28,15 @@ import {TokenInterceptor} from './usuario/token.interceptor';
 import {AuthGuard} from './usuario/auth.guard';
 import {AuthService} from './usuario/auth.service';
 import {AuthErrorHandler} from './usuario/errorhandler';
-import {AlumnosService} from './alumnos/alumnos.service';
+import {ListaCentrosComponent} from './lista-centros/lista-centros.component';
+import {ListaCentrosService} from './lista-centros.service';
 
 const routes = [
   {path: '', component: InfoComponent},
-  {path: 'alumno', component: AlumnoComponent},
-  {path: 'centros', component: CentrosComponent, canActivate: [AuthGuard]},
+  {path: 'alumno', loadChildren: 'app/alumnos/alumnos.module#AlumnosModule'},
+  {path: 'listadecentros', component: ListaCentrosComponent},
+  {path: 'listado-centros', component: CentrosComponent, canActivate: [AuthGuard]},
   {path: 'centro', component: CentroComponent},
-  {path: 'alumnos', component: AlumnosComponent},
   {path: 'datos', component: DatosComponent},
 ];
 
@@ -48,10 +46,9 @@ const routes = [
     CentrosComponent,
     CentroComponent,
     ProvinciaComponent,
-    AlumnoComponent,
-    AlumnosComponent,
     InfoComponent,
-    DatosComponent
+    DatosComponent,
+    ListaCentrosComponent
   ],
   imports: [
     BrowserModule,
@@ -66,10 +63,10 @@ const routes = [
     MatListModule,
     MatIconModule,
     MatTableModule,
-    MatPaginatorModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [CentroService, ProvinciaService, UsuarioService, AuthGuard, AuthService, AlumnosService,
+  providers: [CentroService, ProvinciaService, UsuarioService, AuthGuard, AuthService,
+    ListaCentrosService,
     {provide: MAT_PLACEHOLDER_GLOBAL_OPTIONS, useValue: {float: 'always'}},
     {
       provide: HTTP_INTERCEPTORS,

@@ -1,9 +1,7 @@
 import {Component} from '@angular/core';
 import {AuthService} from './usuario/auth.service';
 import {Router} from '@angular/router';
-import {from} from 'rxjs/observable/from';
-import {map} from 'rxjs/operator/map';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,16 +13,25 @@ import { Observable } from 'rxjs';
       <button mat-button [matMenuTriggerFor]="centros">Centros</button>
       <button mat-button [matMenuTriggerFor]="alumnos">Alumnos</button>
       <button mat-button [routerLink]="['/datos']">Datos</button>
+
+      <button mat-button [routerLink]="['/listadecentros']">Lista de centro</button>
+      
+      
       <button mat-button (click)="logout()">Logout</button>
       <mat-menu #centros="matMenu">
-        <button mat-menu-item [routerLink]="['/centros']">Listado</button>
+        <button mat-menu-item [routerLink]="['/listado-centros']">Listado</button>
         <button mat-menu-item [routerLink]="['/centro']">Alta</button>
       </mat-menu>
       <mat-menu #alumnos="matMenu">
-        <button mat-menu-item [routerLink]="['/alumnos']">Listado</button>
-        <button mat-menu-item [routerLink]="['/alumno']">Alta</button>
+        <button mat-menu-item [routerLink]="['/alumno', '']">Listado</button>
+        <button mat-menu-item [routerLink]="['/alumno', 'alumnos']">Alta</button>
       </mat-menu>
+      
+      
+      
     </div>
+    
+    <a [routerLink]="['/listado-centros']">Centros</a>
 
     <router-outlet style="min-height: 400px"></router-outlet>
 
