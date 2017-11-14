@@ -23,7 +23,9 @@ export class AuthService {
     const decoded = jwt_decode(token);
     console.log(decoded);
 
-    if (decoded.exp === undefined) return null;
+    if (decoded.exp === undefined) {
+      return null;
+    }
 
     const date = new Date(0);
     date.setUTCSeconds(decoded.exp);
@@ -32,11 +34,15 @@ export class AuthService {
 
   isTokenExpired(): boolean {
 
-    let token = this.getToken();
-    if (!token) return true;
+    const token = this.getToken();
+    if (!token) {
+      return true;
+    }
 
     const date = this.getTokenExpirationDate(token);
-    if (date === undefined) return false;
+    if (date === undefined) {
+      return false;
+    }
     // return !(date.valueOf() > new Date().valueOf());
     return false;
   }

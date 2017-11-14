@@ -4,7 +4,7 @@ import {ProvinciaService} from './provincia.service';
 @Component({
   selector: 'app-provincia',
   template:
-    `
+      `
     <p *ngFor="let provincia of provincias">
       {{provincia.nombre}}
     </p>
@@ -15,8 +15,14 @@ export class ProvinciaComponent implements OnInit {
 
   provincias;
 
+  alumnos: Array<any> = [
+    {nombre: 'Jorge', esPrimaria: false},
+    {nombre: 'Juan', esPrimaria: true},
+    {nombre: 'Jose', esPrimaria: false}
+  ];
+
   ngOnInit(): void {
-    var obs = this.provinciaService
+    const obs = this.provinciaService
       .getDiezProvincias()
       .toPromise();
 
@@ -30,12 +36,6 @@ export class ProvinciaComponent implements OnInit {
     //   console.log('dentro', this.provincias);
     // }, err => console.log(err));
   }
-
-  alumnos: Array<any> = [
-    {nombre: 'Jorge', esPrimaria: false},
-    {nombre: 'Juan', esPrimaria: true},
-    {nombre: 'Jose', esPrimaria: false}
-  ];
 
   constructor(private provinciaService: ProvinciaService) {
   }

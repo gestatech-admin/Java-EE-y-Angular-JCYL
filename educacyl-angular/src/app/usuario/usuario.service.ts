@@ -13,7 +13,7 @@ export class UsuarioService {
 
   login(login: any, password: any) {
 
-    let body = new URLSearchParams();
+    const body = new URLSearchParams();
     body.set('login', login);
     body.set('password', password);
 
