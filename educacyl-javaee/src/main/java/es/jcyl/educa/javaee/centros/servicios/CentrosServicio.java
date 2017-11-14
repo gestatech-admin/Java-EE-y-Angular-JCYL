@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.hibernate.Criteria;
@@ -22,7 +23,7 @@ public class CentrosServicio extends BaseServicio {
 
 	@Transactional
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Centro> getCentros(Filtro filtro) {
+	public List<Centro> getCentros(@QueryParam("filtro") Filtro filtro) {
 
 		Criteria criteria = getSession().createCriteria(Centro.class).createAlias("estudios",
 				"estudios", JoinType.LEFT_OUTER_JOIN);
@@ -65,6 +66,15 @@ public class CentrosServicio extends BaseServicio {
 				.setProjection(Projections.count(getSession().getSessionFactory()
 						.getClassMetadata(Centro.class).getIdentifierPropertyName()))
 				.uniqueResult();
+	}
+
+	public List<Centro> getCentros(int page) {
+
+		Criteria criteria = getSession().createCriteria(Centro.class);
+		int maxResults = 10;
+		criteria.setMaxResults(maxResults);
+		criteria.setFirstResult(page * maxResults);
+		return criteria.list();
 	}
 
 }

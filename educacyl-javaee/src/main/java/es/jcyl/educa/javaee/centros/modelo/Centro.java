@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -13,6 +14,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Length;
 
 import es.jcyl.educa.javaee.alumnos.modelo.AlumnoEstudios;
@@ -35,8 +38,9 @@ public class Centro implements AbstractEntidad<Long> {
 	@Column(name = "N_CURSO_ID")
 	private Long cursoId;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "C_CENTRO_ID")
+	@Fetch(FetchMode.SUBSELECT)
 	private Set<AlumnoEstudios> estudios = new HashSet<>();
 
 	@Override
