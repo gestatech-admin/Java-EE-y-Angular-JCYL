@@ -4,14 +4,29 @@
   <h2>Formulario</h2>
 
 
-  <form #formulario="ngForm" (ngSubmit)="enviar(formulario)">
+  <form [formGroup]="form">
 
-    <input name="nombre" ngModel>
+    <input name="nombre" required
+           [formControl]="form.controls['nombre']">
 
-    <input name="apellido1" ngModel>
+    <input name="apellido1" required minlength="5"
+           [formControl]="form.controls['apellido1']">
 
-    <button>Enviar</button>
+    <input name="apellido2" required minlength="5"
+           [formControl]="apellido2">
+
+    <div *ngIf="apellido2.invalid">
+      {{apellido2.errors | json}}
+    </div>
+
+    <button (click)="enviar()">Enviar</button>
 
   </form>
 
 </div>
+
+<!--<div *ngIf="formulario.form.controls['nombre'].invalid">-->
+<!--{{formulario.form.controls['nombre'].errors | json}}-->
+<!--</div>-->
+
+<!--{{formulario.form.errors}}-->
