@@ -38,6 +38,8 @@ public class AlumnosServicio extends BaseServicio {
 
 	public List<Alumno> getAlumnos(Integer page) {
 
+		page = page == null ? 1 : page;
+
 		Criteria criteria = getSession().createCriteria(Alumno.class);
 		criteria.setFirstResult((page - 1) * 10);
 		criteria.setMaxResults(10);
