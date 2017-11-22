@@ -9,7 +9,8 @@ export class CentroService {
 
   getCentros() {
     return this.http.get('http://localhost:8080/educacyl-javaee/api/centros', {
-      headers: new HttpHeaders({'Accept': 'application/json'})
+      headers: new HttpHeaders({'Accept': 'application/json'}),
+      withCredentials: true
     });
   }
 

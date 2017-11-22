@@ -77,7 +77,7 @@ public class DomiciliosApi {
 	@Path("/{calle}")
 	public Domicilio getDomicilio(@PathParam("calle") String calle) {
 
-		return datosUsuario.getDomicilios().stream()
+		return datosUsuario.getUsuario().getDomicilios().stream()
 				.filter(domicilio -> calle.equals(domicilio.getNombre())).findFirst().get();
 	}
 
@@ -85,7 +85,7 @@ public class DomiciliosApi {
 	@Consumes("application/json")
 	public Domicilio addDomicilio(Domicilio domicilio) {
 
-		datosUsuario.getDomicilios().add(domicilio);
+		datosUsuario.getUsuario().getDomicilios().add(domicilio);
 
 		return domicilio;
 	}
@@ -96,7 +96,7 @@ public class DomiciliosApi {
 
 		Domicilio domicilioAEliminar = null;
 
-		for (Domicilio domicilio : datosUsuario.getDomicilios()) {
+		for (Domicilio domicilio : datosUsuario.getUsuario().getDomicilios()) {
 			if (domicilio.getNombre().equals(calle)) {
 				domicilioAEliminar = domicilio;
 			}
@@ -106,7 +106,7 @@ public class DomiciliosApi {
 		// datosUsuario.getDomicilios().remove(domicilioAEliminar);
 
 		GenericEntity<List<Domicilio>> list = new GenericEntity<List<Domicilio>>(
-				datosUsuario.getDomicilios()) {
+				datosUsuario.getUsuario().getDomicilios()) {
 		};
 
 		return Response.ok(list).build();

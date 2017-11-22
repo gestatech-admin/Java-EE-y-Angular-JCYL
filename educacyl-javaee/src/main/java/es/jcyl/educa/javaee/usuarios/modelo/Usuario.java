@@ -1,5 +1,7 @@
 package es.jcyl.educa.javaee.usuarios.modelo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,6 +9,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import es.jcyl.educa.javaee.alumnos.modelo.Domicilio;
 
 @Entity
 @Table
@@ -70,6 +74,10 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<Domicilio> getDomicilios() {
+		return null;
 	}
 
 }

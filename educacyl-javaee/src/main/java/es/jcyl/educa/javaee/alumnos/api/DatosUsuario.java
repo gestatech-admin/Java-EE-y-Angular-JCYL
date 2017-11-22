@@ -1,39 +1,24 @@
 package es.jcyl.educa.javaee.alumnos.api;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.faces.bean.SessionScoped;
 
-import es.jcyl.educa.javaee.alumnos.modelo.Domicilio;
+import es.jcyl.educa.javaee.usuarios.modelo.Usuario;
 
 @SessionScoped
 public class DatosUsuario implements Serializable {
 
-	private boolean logueado;
+	private static final long serialVersionUID = 1L;
 
-	private List<Domicilio> domicilios = new ArrayList<Domicilio>() {
-		{
-			add(new Domicilio("Rigoberto", 4));
-			add(new Domicilio("Paseo Zorrilla", 10));
-		}
-	};
+	private Usuario usuario;
 
-	public List<Domicilio> getDomicilios() {
-		return domicilios;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setDomicilios(List<Domicilio> domicilios) {
-		this.domicilios = domicilios;
-	}
-
-	public boolean esLogueado() {
-		return logueado;
-	}
-
-	public void setLogueado(boolean logueado) {
-		this.logueado = logueado;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

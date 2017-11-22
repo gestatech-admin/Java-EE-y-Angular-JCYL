@@ -21,6 +21,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 
+import es.jcyl.educa.javaee.alumnos.api.DatosUsuario;
 import es.jcyl.educa.javaee.api.security.RestSecured;
 import es.jcyl.educa.javaee.api.security.Seguro;
 import es.jcyl.educa.javaee.centros.modelo.Centro;
@@ -31,7 +32,10 @@ import es.jcyl.educa.javaee.centros.servicios.CentrosServicio;
 public class CentrosApi {
 
 	@Inject
-	CentrosServicio centrosServicio;
+	private DatosUsuario datosUsuario;
+
+	@Inject
+	private CentrosServicio centrosServicio;
 
 	@POST
 	@Consumes("application/json")
@@ -69,6 +73,9 @@ public class CentrosApi {
 	@Seguro
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response lista() {
+
+		System.out.println(datosUsuario.getUsuario().getNombre());
+
 		final List<Centro> centros = centrosServicio.getCentros();
 
 		GenericEntity<List<Centro>> list = new GenericEntity<List<Centro>>(centros) {

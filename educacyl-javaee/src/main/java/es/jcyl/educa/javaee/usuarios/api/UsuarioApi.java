@@ -29,6 +29,7 @@ import javax.ws.rs.core.UriInfo;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import es.jcyl.educa.javaee.alumnos.api.DatosUsuario;
 import es.jcyl.educa.javaee.api.security.GeneradorClave;
 import es.jcyl.educa.javaee.usuarios.modelo.Usuario;
 import io.jsonwebtoken.Jwts;
@@ -47,6 +48,9 @@ public class UsuarioApi {
 	@Inject
 	private GeneradorClave generadorClave;
 
+	@Inject
+	private DatosUsuario datosUsuario;
+
 	@PersistenceContext
 	private EntityManager em;
 
@@ -58,6 +62,7 @@ public class UsuarioApi {
 		try {
 			authenticate(login, password);
 			String token = crearToken(login);
+
 			return Response.ok().header(AUTHORIZATION, "Bearer " + token).build();
 		} catch (Exception e) {
 			return Response.status(UNAUTHORIZED).build();
@@ -76,8 +81,10 @@ public class UsuarioApi {
 				.add(Restrictions.eq("password", digest(password)))
 				.add(Restrictions.eq("login", login)).uniqueResult();
 		if (usuario == null) {
+
 			throw new SecurityException("Invalid user/password");
 		}
+		datosUsuario.setUsuario(usuario);
 	}
 
 	private String crearToken(String login) {
