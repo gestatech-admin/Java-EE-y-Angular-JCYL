@@ -3,6 +3,7 @@ package es.jcyl.educa.javaee.centros.servicios;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.QueryParam;
@@ -14,6 +15,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 
+import es.jcyl.educa.javaee.alumnos.api.DatosUsuario;
 import es.jcyl.educa.javaee.centros.api.Filtro;
 import es.jcyl.educa.javaee.centros.modelo.Centro;
 import es.jcyl.educa.javaee.comun.servicio.BaseServicio;
@@ -76,5 +78,8 @@ public class CentrosServicio extends BaseServicio {
 		criteria.setFirstResult(page * maxResults);
 		return criteria.list();
 	}
+
+	@Inject
+	private DatosUsuario datosUsuario;
 
 }

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Transient;
 
 @Embeddable
 public class MunicipioId implements Serializable {
@@ -12,7 +11,6 @@ public class MunicipioId implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "C_PROV_ID")
-	@Transient
 	private Long provinciaId;
 
 	@Column(name = "C_MUNI_ID")

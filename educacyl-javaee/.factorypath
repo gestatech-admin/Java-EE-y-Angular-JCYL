@@ -1,0 +1,13 @@
+<factorypath>
+    <factorypathentry kind="PLUGIN" id="org.eclipse.jst.ws.annotations.core" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/Users/aelian/Downloads/hibernate-jpamodelgen-5.1.8.Final.jar" enabled="false" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/Users/aelian/Downloads/external jars/eclipselink-2.7.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/Users/aelian/Downloads/external jars/javax.persistence-2.2.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/Users/aelian/Downloads/external jars/jaxen-1.1.1.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/Users/aelian/Downloads/external jars/org.eclipse.persistence.antlr-2.7.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/Users/aelian/Downloads/external jars/org.eclipse.persistence.asm-2.7.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/Users/aelian/Downloads/external jars/org.eclipse.persistence.core-2.7.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/Users/aelian/Downloads/external jars/org.eclipse.persistence.jpa-2.7.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/Users/aelian/Downloads/external jars/org.eclipse.persistence.jpa.jpql-2.7.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/Users/aelian/Downloads/external jars/org.eclipse.persistence.jpa.modelgen.processor-2.7.0.jar" enabled="true" runInBatchMode="false"/>
+</factorypath>

@@ -3,3 +3,6 @@
 .settings/
 
 target/
+/.apt_generated/
+/generated/
+/eclipselink/

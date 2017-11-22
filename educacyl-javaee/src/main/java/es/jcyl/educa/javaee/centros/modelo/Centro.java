@@ -1,6 +1,8 @@
 package es.jcyl.educa.javaee.centros.modelo;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -20,6 +22,7 @@ import org.hibernate.validator.constraints.Length;
 
 import es.jcyl.educa.javaee.alumnos.modelo.AlumnoEstudios;
 import es.jcyl.educa.javaee.comun.modelo.AbstractEntidad;
+import es.jcyl.educa.javaee.comun.modelo.Personal;
 
 @Entity
 @Table(name = "CURS_CENTROS")
@@ -42,6 +45,15 @@ public class Centro implements AbstractEntidad<Long> {
 	@JoinColumn(name = "C_CENTRO_ID")
 	@Fetch(FetchMode.SUBSELECT)
 	private Set<AlumnoEstudios> estudios = new HashSet<>();
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
+	@JoinColumn(name = "C_CENTRO_ID", referencedColumnName = "C_CENTRO_ID")
+	private List<Personal> empleados = new ArrayList<>();
+
+	public List<Personal> getListaPersonal() {
+		return new ArrayList<>(empleados);
+	}
 
 	@Override
 	public Long getId() {
