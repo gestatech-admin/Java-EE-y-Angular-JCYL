@@ -4,7 +4,7 @@ import {ProvinciaService} from './provincia.service';
 @Component({
   selector: 'app-provincia',
   template:
-      `
+    `
     <p *ngFor="let provincia of provincias">
       {{provincia.nombre}}
     </p>

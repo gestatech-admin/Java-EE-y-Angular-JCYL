@@ -7,12 +7,7 @@ import {CentroComponent} from './centro/centro.component';
 import {CentroService} from './centros/centro.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  MAT_PLACEHOLDER_GLOBAL_OPTIONS,
-  MatCardModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
+  MAT_PLACEHOLDER_GLOBAL_OPTIONS, MatCardModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule,
   MatTableModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
