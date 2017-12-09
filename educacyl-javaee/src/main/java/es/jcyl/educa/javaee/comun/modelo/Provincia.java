@@ -20,7 +20,7 @@ public class Provincia implements Serializable {
 
 	@Id
 	@Column(name = "C_PROV_ID")
-	private Long id;
+	private Integer id;
 
 	@Column(name = "D_PROV")
 	private String nombre;
@@ -32,11 +32,11 @@ public class Provincia implements Serializable {
 		super();
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

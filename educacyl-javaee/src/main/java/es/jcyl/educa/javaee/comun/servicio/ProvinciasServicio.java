@@ -23,9 +23,9 @@ public class ProvinciasServicio extends BaseServicio {
 		CriteriaQuery<Provincia> query = builder.createQuery(Provincia.class);
 		Root<Provincia> variableRoot = query.from(Provincia.class);
 		CriteriaQuery<Provincia> select = query.where(
-				builder.notEqual(variableRoot.get("id"), builder.parameter(Long.class, "id")));
+				builder.notEqual(variableRoot.get("id"), builder.parameter(Integer.class, "id")));
 
-		return entityManager.createQuery(select).setParameter("id", 47L).getResultList();
+		return entityManager.createQuery(select).setParameter("id", 47).getResultList();
 	}
 
 	public void crear(Provincia provincia) {
