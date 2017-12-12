@@ -23,13 +23,16 @@ import {TokenInterceptor} from './usuario/token.interceptor';
 import {AuthGuard} from './usuario/auth.guard';
 import {AuthService} from './usuario/auth.service';
 import {AuthErrorHandler} from './usuario/errorhandler';
-import {ListaCentrosComponent} from './lista-centros/lista-centros.component';
-import {ListaCentrosService} from './lista-centros.service';
+import {LocalidadComponent} from './localidad/localidad.component';
+import {SelectorLocalidadComponent} from './selector-localidad/selector-localidad.component';
+import {SelectorProvinciaComponent} from './selector-provincia/selector-provincia.component';
+import {SelectorMunicipioComponent} from './selector-municipio/selector-municipio.component';
+import {MunicipioService} from './municipio/municipio.service';
+import {LocalidadService} from './localidad.service';
 
 const routes = [
   {path: '', component: InfoComponent},
   {path: 'alumno', loadChildren: 'app/alumnos/alumnos.module#AlumnosModule'},
-  {path: 'listadecentros', component: ListaCentrosComponent},
   {path: 'listado-centros', component: CentrosComponent, canActivate: [AuthGuard]},
   {path: 'centro', component: CentroComponent},
   {path: 'datos', component: DatosComponent},
@@ -43,7 +46,10 @@ const routes = [
     ProvinciaComponent,
     InfoComponent,
     DatosComponent,
-    ListaCentrosComponent
+    LocalidadComponent,
+    SelectorLocalidadComponent,
+    SelectorProvinciaComponent,
+    SelectorMunicipioComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,8 +66,7 @@ const routes = [
     MatTableModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [CentroService, ProvinciaService, UsuarioService, AuthGuard, AuthService,
-    ListaCentrosService,
+  providers: [CentroService, ProvinciaService, UsuarioService, AuthGuard, AuthService, MunicipioService, LocalidadService,
     {provide: MAT_PLACEHOLDER_GLOBAL_OPTIONS, useValue: {float: 'always'}},
     {
       provide: HTTP_INTERCEPTORS,
