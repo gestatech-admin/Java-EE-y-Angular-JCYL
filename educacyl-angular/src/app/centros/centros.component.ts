@@ -10,6 +10,11 @@ import {MatTableDataSource} from '@angular/material';
     <div style="padding:20px">
       <h3>Listado de centros</h3>
 
+      <app-selector-provincia (provinciaSeleccionada)="asignarProvincia($event)"></app-selector-provincia>
+      <app-selector-municipio (municipioSeleccionado)="asignarMunicipio($event)" [provinciaId]="provinciaId"></app-selector-municipio>
+      <app-selector-localidad (localidadSeleccionada)="asignarLocalidad($event)" [provinciaId]="provinciaId"
+                              [municipioId]="municipioId"></app-selector-localidad>
+
       <div class="example-container mat-elevation-z8">
         <mat-table #table [dataSource]="dataSource">
 
@@ -39,23 +44,36 @@ import {MatTableDataSource} from '@angular/material';
 export class CentrosComponent implements OnInit {
 
   dataSource;
+  provinciaId;
+  municipioId;
 
   displayedColumns = ['centroId', 'nombre', 'cursoId'];
 
   constructor(private centroService: CentroService) {
-
   }
 
   cargarCentro(row) {
   }
 
-  enviar() {
+  ngOnInit() {
+    this.centroService.getCentros().subscribe(this.paint);
   }
 
-  ngOnInit() {
-    this.centroService.getCentros().subscribe(
-      (x: any) => this.dataSource = new MatTableDataSource<Element>(x)
-    );
+  private paint(x: any) {
+    return this.dataSource = new MatTableDataSource<Element>(x);
+  }
+
+  asignarProvincia($event) {
+    this.provinciaId = $event;
+  }
+
+  asignarMunicipio($event) {
+    this.municipioId = $event;
+  }
+
+  asignarLocalidad($event) {
+    this.centroService.getCentros($event.provinciaId, $event.municipioId, $event.localidadId)
+      .subscribe(this.paint);
   }
 
 }

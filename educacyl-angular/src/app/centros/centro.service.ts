@@ -7,9 +7,10 @@ export class CentroService {
   constructor(private http: HttpClient) {
   }
 
-  getCentros() {
+  getCentros(provinciaId = '', municipioId = '', localidadId = '') {
     return this.http.get('http://localhost:8080/educacyl-javaee/api/centros', {
       headers: new HttpHeaders({'Accept': 'application/json'}),
+      params: provinciaId != '' ? {provinciaId, municipioId, localidadId} : null,
       withCredentials: true
     });
   }
