@@ -9,7 +9,6 @@ import {ProvinciaService} from './provincia.service';
       {{provincia.nombre}}
     </p>
   `,
-  styleUrls: ['./provincia.component.css']
 })
 export class ProvinciaComponent implements OnInit {
 
