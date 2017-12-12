@@ -1,2 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.header {
+  height: 100px;
+  background-color: #684480;
+}
+
+.footer {
+  height: 50px;
+  background-color: #684480;
+}
+
+.placeholder-title {
+  color: white;
+}
+
+.center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  min-height: 400px;
+  padding: 20px
+}

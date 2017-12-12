@@ -1,4 +1,8 @@
-<div style="height:100px; background-color:#684480"></div>
+<div class="header center-flex placeholder-title">
+
+  CABECERA
+
+</div>
 
 <div id="menu">
   <button mat-button [matMenuTriggerFor]="centros">Centros</button>
@@ -20,8 +24,10 @@
 
 </div>
 
-<a [routerLink]="['/listado-centros']">Centros</a>
+<router-outlet class="content"></router-outlet>
 
-<router-outlet style="min-height: 400px"></router-outlet>
+<div class="footer center-flex placeholder-title">
 
-<div style="height:50px; background-color:#684480"></div>
+  PIE
+
+</div>
