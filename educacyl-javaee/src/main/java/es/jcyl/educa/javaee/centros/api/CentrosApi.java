@@ -1,7 +1,10 @@
 package es.jcyl.educa.javaee.centros.api;
 
-import java.net.URI;
-import java.util.List;
+import es.jcyl.educa.javaee.alumnos.api.DatosUsuario;
+import es.jcyl.educa.javaee.api.security.RestSecured;
+import es.jcyl.educa.javaee.api.security.Seguro;
+import es.jcyl.educa.javaee.centros.modelo.Centro;
+import es.jcyl.educa.javaee.centros.servicios.CentrosServicio;
 
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
@@ -20,12 +23,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
-
-import es.jcyl.educa.javaee.alumnos.api.DatosUsuario;
-import es.jcyl.educa.javaee.api.security.RestSecured;
-import es.jcyl.educa.javaee.api.security.Seguro;
-import es.jcyl.educa.javaee.centros.modelo.Centro;
-import es.jcyl.educa.javaee.centros.servicios.CentrosServicio;
+import java.net.URI;
+import java.util.List;
 
 @Path("/centros")
 @RequestScoped
@@ -41,8 +40,9 @@ public class CentrosApi {
 	@Consumes("application/json")
 	public Response crear(Centro centro) {
 		centrosServicio.crear(centro);
-		URI url = UriBuilder.fromResource(CentrosApi.class).path(String.valueOf(centro.getId()))
-				.build();
+		URI url = UriBuilder.fromResource(CentrosApi.class).path(
+			String.valueOf(centro.getId()))
+			.build();
 		return Response.created(url).build();
 	}
 
@@ -64,41 +64,50 @@ public class CentrosApi {
 		try {
 			Centro centro = centrosServicio.buscarPorId(id);
 			return centro;
-		} catch (NoResultException nre) {
+		}
+		catch (NoResultException nre) {
 			return null;
 		}
 	}
 
 	@GET
 	@Seguro
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response lista() {
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Response lista(
+		@QueryParam("provinciaId") Integer provinciaId,
+		@QueryParam("municipioId") Integer municipioId,
+		@QueryParam("localidadId") Integer localidadId) {
 
-		System.out.println(datosUsuario.getUsuario().getNombre());
+		final List<Centro> centros =
+			provinciaId == null ? centrosServicio.getCentros() :
+				centrosServicio.getCentros(provinciaId, municipioId,
+					localidadId);
 
-		final List<Centro> centros = centrosServicio.getCentros();
-
-		GenericEntity<List<Centro>> list = new GenericEntity<List<Centro>>(centros) {
-		};
-		return Response.ok(list).header("total", centrosServicio.total()).build();
+		GenericEntity<List<Centro>> list =
+			new GenericEntity<List<Centro>>(centros) {
+			};
+		return Response.ok(list).header(
+			"total", centrosServicio.total()).build();
 	}
 
 	@GET
 	@Path("filtro")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response filtro(@QueryParam("filtro") Filtro filtro) {
 
 		final List<Centro> centros = centrosServicio.getCentros(filtro);
 
-		GenericEntity<List<Centro>> list = new GenericEntity<List<Centro>>(centros) {
-		};
-		return Response.ok(list).header("total", centrosServicio.total()).build();
+		GenericEntity<List<Centro>> list =
+			new GenericEntity<List<Centro>>(centros) {
+			};
+		return Response.ok(list).header(
+			"total", centrosServicio.total()).build();
 	}
 
 	@GET
 	@Path("total")
 	public Long total() {
-		return (Long) centrosServicio.total();
+		return (Long)centrosServicio.total();
 	}
 
 	@PUT
@@ -113,7 +122,8 @@ public class CentrosApi {
 		}
 		try {
 			centrosServicio.actualizar(centro);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			return Response.status(Status.CONFLICT).entity(centro).build();
 		}
 		return Response.noContent().build();

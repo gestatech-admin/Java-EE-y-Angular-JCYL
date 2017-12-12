@@ -22,15 +22,15 @@ public class Localidad implements Serializable {
 
 	@Id
 	@Column(name = "C_PROV_ID")
-	private Long provinciaId;
+	private Integer provinciaId;
 
 	@Id
 	@Column(name = "C_MUNI_ID")
-	private Long municipioId;
+	private Integer municipioId;
 
 	@Id
 	@Column(name = "C_LOCA_ID")
-	private Long localidadId;
+	private Integer localidadId;
 
 	@Column(name = "D_LOCA")
 	private String descripcion;

@@ -1,31 +1,34 @@
 package es.jcyl.educa.javaee.comun.servicio;
 
-import java.util.List;
+import es.jcyl.educa.javaee.comun.modelo.Municipio;
+import es.jcyl.educa.javaee.comun.modelo.MunicipioId;
+import org.hibernate.criterion.Restrictions;
 
 import javax.ejb.Stateless;
 import javax.transaction.Transactional;
-
-import org.hibernate.criterion.Restrictions;
-
-import es.jcyl.educa.javaee.comun.modelo.Municipio;
-import es.jcyl.educa.javaee.comun.modelo.MunicipioId;
+import java.util.List;
 
 @Stateless
 public class MunicipioServicio extends BaseServicio {
 
 	@Transactional
-	public Municipio getMunicipio(Long municipioId, Long provinciaId) {
-		return getSession().get(Municipio.class, new MunicipioId(municipioId, provinciaId));
+	public Municipio getMunicipio(Integer municipioId, Integer provinciaId) {
+		return getSession().get(
+			Municipio.class,
+			new MunicipioId(municipioId, provinciaId));
 	}
 
 	@Transactional
 	public List<Municipio> getMunicipios() {
+
 		return getSession().createCriteria(Municipio.class).list();
 	}
 
 	@Transactional
-	public List<Municipio> getMunicipios(Long provinciaId) {
+	public List<Municipio> getMunicipios(Integer provinciaId) {
 		return getSession().createCriteria(Municipio.class)
-				.add(Restrictions.eq("municipioId.provincia.id", provinciaId)).list();
+			.createAlias("provincia", "provincia")
+			.add(Restrictions.eq("provincia.id", provinciaId))
+			.list();
 	}
 }

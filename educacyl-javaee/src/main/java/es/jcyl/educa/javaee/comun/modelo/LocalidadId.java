@@ -6,33 +6,33 @@ public class LocalidadId implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long provinciaId;
+	private Integer provinciaId;
 
-	private Long municipioId;
+	private Integer municipioId;
 
-	private Long localidadId;
+	private Integer localidadId;
 
-	public Long getProvinciaId() {
+	public Integer getProvinciaId() {
 		return provinciaId;
 	}
 
-	public void setProvinciaId(Long provinciaId) {
+	public void setProvinciaId(Integer provinciaId) {
 		this.provinciaId = provinciaId;
 	}
 
-	public Long getMunicipioId() {
+	public Integer getMunicipioId() {
 		return municipioId;
 	}
 
-	public void setMunicipioId(Long municipioId) {
+	public void setMunicipioId(Integer municipioId) {
 		this.municipioId = municipioId;
 	}
 
-	public Long getLocalidadId() {
+	public Integer getLocalidadId() {
 		return localidadId;
 	}
 
-	public void setLocalidadId(Long localidadId) {
+	public void setLocalidadId(Integer localidadId) {
 		this.localidadId = localidadId;
 	}
 

@@ -1,24 +1,26 @@
 package es.jcyl.educa.javaee.centros.servicios;
 
-import java.util.List;
-
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-
+import es.jcyl.educa.javaee.alumnos.api.DatosUsuario;
+import es.jcyl.educa.javaee.centros.api.Filtro;
+import es.jcyl.educa.javaee.centros.modelo.Centro;
+import es.jcyl.educa.javaee.centros.modelo.Centro_;
+import es.jcyl.educa.javaee.comun.servicio.BaseServicio;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 
-import es.jcyl.educa.javaee.alumnos.api.DatosUsuario;
-import es.jcyl.educa.javaee.centros.api.Filtro;
-import es.jcyl.educa.javaee.centros.modelo.Centro;
-import es.jcyl.educa.javaee.comun.servicio.BaseServicio;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Stateless
 public class CentrosServicio extends BaseServicio {
@@ -27,7 +29,8 @@ public class CentrosServicio extends BaseServicio {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public List<Centro> getCentros(@QueryParam("filtro") Filtro filtro) {
 
-		Criteria criteria = getSession().createCriteria(Centro.class).createAlias("estudios",
+		Criteria criteria =
+			getSession().createCriteria(Centro.class).createAlias("estudios",
 				"estudios", JoinType.LEFT_OUTER_JOIN);
 
 		if (filtro.getName() != null) {
@@ -39,9 +42,32 @@ public class CentrosServicio extends BaseServicio {
 
 	@Transactional
 	public List<Centro> getCentros() {
-
 		return getSession().createCriteria(Centro.class)
-				.createAlias("estudios", "estudios", JoinType.LEFT_OUTER_JOIN).list();
+			.createAlias("estudios", "estudios", JoinType.LEFT_OUTER_JOIN)
+			.list();
+	}
+
+	public List<Centro> getCentros(
+		Integer provinciaId, Integer municipioId, Integer localidadId) {
+
+		CriteriaBuilder builder = getCB();
+
+		CriteriaQuery<Centro> query = builder.createQuery(Centro.class);
+		Root<Centro> centroRoot = query.from(Centro.class);
+		CriteriaQuery<Centro> select = query.where(
+			builder.like(
+				centroRoot.get(Centro_.centroId).as(String.class),
+				 "47%")
+		);
+		return entityManager.createQuery(select).getResultList();
+	}
+
+	public List<Centro> getCentros(int page) {
+		Criteria criteria = getSession().createCriteria(Centro.class);
+		int maxResults = 10;
+		criteria.setMaxResults(maxResults);
+		criteria.setFirstResult(page * maxResults);
+		return criteria.list();
 	}
 
 	public void crear(Centro centro) {
@@ -65,18 +91,9 @@ public class CentrosServicio extends BaseServicio {
 
 	public Object total() {
 		return getSession().createCriteria(Centro.class)
-				.setProjection(Projections.count(getSession().getSessionFactory()
-						.getClassMetadata(Centro.class).getIdentifierPropertyName()))
-				.uniqueResult();
-	}
-
-	public List<Centro> getCentros(int page) {
-
-		Criteria criteria = getSession().createCriteria(Centro.class);
-		int maxResults = 10;
-		criteria.setMaxResults(maxResults);
-		criteria.setFirstResult(page * maxResults);
-		return criteria.list();
+			.setProjection(Projections.count(getSession().getSessionFactory()
+				.getClassMetadata(Centro.class).getIdentifierPropertyName()))
+			.uniqueResult();
 	}
 
 	@Inject
