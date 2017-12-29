@@ -57,7 +57,7 @@ public class CentrosServicio extends BaseServicio {
 		CriteriaQuery<Centro> select = query.where(
 			builder.like(
 				centroRoot.get(Centro_.centroId).as(String.class),
-				 "47%")
+				provinciaId + "%")
 		);
 		return entityManager.createQuery(select).getResultList();
 	}

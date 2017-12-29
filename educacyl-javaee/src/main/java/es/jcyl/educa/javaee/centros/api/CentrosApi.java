@@ -79,7 +79,8 @@ public class CentrosApi {
 		@QueryParam("localidadId") Integer localidadId) {
 
 		final List<Centro> centros =
-			provinciaId == null ? centrosServicio.getCentros() :
+			provinciaId == null || municipioId == null || localidadId == null ?
+				centrosServicio.getCentros() :
 				centrosServicio.getCentros(provinciaId, municipioId,
 					localidadId);
 

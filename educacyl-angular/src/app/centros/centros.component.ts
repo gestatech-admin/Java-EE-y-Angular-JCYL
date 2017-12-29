@@ -15,6 +15,7 @@ import {MatTableDataSource} from '@angular/material';
       <app-selector-localidad (localidadSeleccionada)="asignarLocalidad($event)" [provinciaId]="provinciaId"
                               [municipioId]="municipioId"></app-selector-localidad>
 
+
       <div class="example-container mat-elevation-z8">
         <mat-table #table [dataSource]="dataSource">
 
@@ -28,15 +29,12 @@ import {MatTableDataSource} from '@angular/material';
             <mat-cell *matCellDef="let element"> {{element.nombre}}</mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="cursoId">
-            <mat-header-cell *matHeaderCellDef> Curso Id</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.cursoId}}</mat-cell>
-          </ng-container>
-
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="cargarCentro(row)"></mat-row>
         </mat-table>
       </div>
+
+
     </div>
   `,
   styleUrls: ['./centros.component.css']
@@ -47,7 +45,7 @@ export class CentrosComponent implements OnInit {
   provinciaId;
   municipioId;
 
-  displayedColumns = ['centroId', 'nombre', 'cursoId'];
+  displayedColumns = ['centroId', 'nombre'];
 
   constructor(private centroService: CentroService) {
   }
@@ -56,11 +54,13 @@ export class CentrosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.centroService.getCentros().subscribe(this.paint);
+    this.centroService.getCentros().subscribe(this.paint());
   }
 
-  private paint(x: any) {
-    return this.dataSource = new MatTableDataSource<Element>(x);
+  paint() {
+    return x => {
+      this.dataSource = new MatTableDataSource<any>(x);
+    };
   }
 
   asignarProvincia($event) {
@@ -73,7 +73,7 @@ export class CentrosComponent implements OnInit {
 
   asignarLocalidad($event) {
     this.centroService.getCentros($event.provinciaId, $event.municipioId, $event.localidadId)
-      .subscribe(this.paint);
+      .subscribe(this.paint());
   }
 
 }
