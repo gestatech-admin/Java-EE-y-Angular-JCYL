@@ -9,16 +9,14 @@
   <button mat-button [matMenuTriggerFor]="alumnos">Alumnos</button>
   <button mat-button [routerLink]="['/datos']">Datos</button>
 
-  <button mat-button [routerLink]="['/listadecentros']">Lista de centro</button>
-
   <button mat-button (click)="logout()">Logout</button>
   <mat-menu #centros="matMenu">
     <button mat-menu-item [routerLink]="['/listado-centros']">Listado</button>
     <button mat-menu-item [routerLink]="['/centro']">Alta</button>
   </mat-menu>
   <mat-menu #alumnos="matMenu">
-    <button mat-menu-item [routerLink]="['/alumno', '']">Listado</button>
-    <button mat-menu-item [routerLink]="['/alumno', 'alumnos']">Alta</button>
+    <button mat-menu-item [routerLink]="['/alumno', 'alumnos']">Listado</button>
+    <button mat-menu-item [routerLink]="['/alumno']">Alta</button>
   </mat-menu>
 
 
